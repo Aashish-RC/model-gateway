@@ -1,0 +1,36 @@
+server:
+  host: "0.0.0.0"
+  port: 8080
+  logLevel: "info"
+
+gateway:
+  timeoutMs: 60000
+  retryAttempts: 3
+  rateLimit:
+    maxRequestsPerMinute: 600
+
+providers:
+  openai:
+    baseUrl: "https://api.openai.com/v1"
+    keys:
+      - id: "openai-key-primary"
+        key: "sk-demo-openai-key"
+        weight: 1
+  anthropic:
+    baseUrl: "https://api.anthropic.com"
+    keys:
+      - id: "anthropic-key-primary"
+        key: "sk-ant-demo-key"
+        weight: 1
+  gemini:
+    baseUrl: "https://generativelanguage.googleapis.com"
+    keys:
+      - id: "gemini-key-primary"
+        key: "AIzaSy-demo-key"
+        weight: 1
+
+routing:
+  defaultProvider: "openai"
+  fallbackProviders:
+    - "anthropic"
+    - "gemini"
